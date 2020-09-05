@@ -34,63 +34,14 @@
 
 
   <!-- Main Content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
 
-        <div th:each="post : ${posts}" class="post-preview">
-
-          <a th:href="@{'/posts&' + ${post.postId}}">
-            <h2 th:text="${post.title}" class="post-title">Post title</h2>
-            <h3 th:text="'Category: ' + ${post.category.getName()}" class="post-subtitle">Post category</h3>
-          </a>
-
-          <div th:if="${auth != null}" class="clearfix">
-
-            <div th:if="${!author.equals(post.getAuthor())}">
-              <div th:if="${isAdmin}">
-              <form th:action="@{/deletePost}" th:method="POST" th:object="${post}">
-                <input type="text" th:name="post_id" th:value="${post.postId}" hidden>
-                <button class="btn btn-danger float-right" type="submit">delete</button>
-              </form>
-             </div>
-            </div>
-
-            <div th:if="${author.equals(post.getAuthor())}">
-                <form th:action="@{/deletePost}" th:method="POST" th:object="${post}">
-                  <input type="text" th:name="post_id" th:value="${post.postId}" hidden>
-                  <button class="btn btn-danger float-right" type="submit">delete</button>
-                </form>
-              </div>
-
-            <div th:if="${author.equals(post.getAuthor())}">
-              <form th:action="@{/updatePost}" th:method="GET" th:object="${post}">
-                <input type="text" th:name="post_id" th:value="${post.postId}" hidden>
-                <button class="btn btn-warning float-right" type="submit">update</button>
-              </form>
-            </div>
-
-          </div>
-
-          <p th:text="'Published by: ' + ${post.author.name} + ' ' + ${post.author.lastName} +
-           ' date: ' + ${#temporals.format(post.dateAdded, 'dd.MM.yyyy, HH:mm')}" class="post-meta">Author & Published date</p>
-
-        </div>
-
-        <hr>
-
-      </div>
-    </div>
-  </div>
 
         <div class="container">
           <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-              <h1>Dodaj nowego posta</h1>
-        <!--      <form th:action="@{/url_gdzie_przekazujemy_obiekt_post}"
-                  th:method="metoda_ktora przekazujey obiekt post"
-                  th:object="${nazwa obiektu -> post}">                         -->
-              <form th:action="@{/addPost}" th:method="POST" th:object="${newPost}">
+
+              <form th:action="@{/updatePost}" th:method="POST" th:object="${postToUpdate}">
+                <input th:field="*{postId}" type="text" hidden> <!-- przekazuje aktualna wartosc id w poście -->
                 <div class="control-group">
                   <div class="form-group floating-label-form-group controls">
                     <input th:field="*{title}" class="form-control" type="text" placeholder="Insert post title" id="title"><br>
@@ -110,8 +61,9 @@
                     </select><br>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary" value="Add new post">Add new post</button>
+                <button type="submit" class="btn btn-primary" value="Update post">Update post</button>
               </form>
+
             </div>
           </div>
         </div>

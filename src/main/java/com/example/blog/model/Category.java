@@ -1,9 +1,9 @@
 package com.example.blog.model;
 
 public enum Category {
-    DEV("Programowanie"),
-    DEV_OPS("Administracja"),
-    TESTING("Testowanie");
+    DEV("Programming"),
+    DEV_OPS("Administration"),
+    TESTING("Testing");
     private String name;
 
     Category(String name) {

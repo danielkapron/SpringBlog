@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Data
@@ -17,8 +18,10 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long postId;
+    @NotBlank(message = "Title can't be empty")
     private String title;
     @Column(columnDefinition = "text")
+    @NotBlank(message = "Title can't be empty")
     private String content;
     private Category category;
     @CreationTimestamp
